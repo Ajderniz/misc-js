@@ -1,0 +1,28 @@
+* {
+  font-family: "Comic Sans MS", sans-serif;
+}
+
+body, #canvas {
+  background-color: beige;
+}
+
+.switch-slider, #canvas-container {
+  background-color: palevioletred;
+  border-color: lightcoral;
+  border-style: inset;
+}
+
+.switch-slider:before {
+  color: beige;
+  height: 22px;
+  width: 22px;
+}
+
+#canvas-container, #canvas {
+  border-radius: 19px;
+}
+
+.switch-slider:before, #canvas {
+  border-style: outset;
+  border-color: lightcyan;
+}
