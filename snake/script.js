@@ -10,12 +10,12 @@ const Init = {
   dirX:        1,
   dirY:        0,
   snakeLen:    3,
-  fruitChance: 0.01,
+  fruitChance: 0.05,
 };
 
 const Cnst = {
   sleepTimeDec:   5,
-  fruitChanceInc: .005,
+  fruitChanceInc: .002,
 };
 
 const Themes = {
@@ -154,7 +154,7 @@ function updateInfo() {
   Elems.infoInputKey.textContent = St.inputKey;
   Elems.infoSleepTime.textContent = St.sleepTime;
   Elems.infoFruitCount.textContent = Fruit.x.length;
-  Elems.infoFruitChance.textContent = +Fruit.chance * 100
+  Elems.infoFruitChance.textContent = (Fruit.chance * 100).toFixed(1);
 }
 
 function updateSys() {
