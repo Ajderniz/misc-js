@@ -9,6 +9,35 @@
 </head>
 <body>
   <main>
+    <details id="info">
+      <summary><h3 class="inline">Debug Info</h3></summary>
+      <table>
+        <tr>
+          <th>Dots in Y</th>
+          <td id="info-dots-y"></td>
+        </tr>
+        <tr>
+          <th>Dot Size</th>
+          <td id="info-dot-size"></td>
+        </tr>
+        <tr>
+          <th>Input Key</th>
+          <td id="info-input-key"></td>
+        </tr>
+        <tr>
+          <th>Step Delay</th>
+          <td><span id="info-sleep-time"></span>ms</td>
+        </tr>
+        <tr>
+          <th>Fruit Count</th>
+          <td id="info-fruit-count"></td>
+        </tr>
+        <tr>
+          <th>Fruit Chance</th>
+          <td><span id="info-fruit-chance"></span>%</td>
+        </tr>
+      </table>
+    </details>
     <div id="theme-switch-container">
       <span>L</span>
       <label class="switch">
@@ -19,28 +48,35 @@
     </div>
     <h1 id="title">SNAKE</h1>
     <div id="canvas-container">
-      <canvas id="canvas" width="320" height="320"></canvas>
+      <canvas id="canvas" width="240" height="240"></canvas>
     </div>
     <h2 id="score-h2">SCORE: <span id="score"></span></h2>
-    <form id="opts">
-      <table>
-        <tr>
-          <th><label>Dots in X</label></th>
-          <td><input type="range" value="10" min="5" max="320" class="slider" name="dots-x-slider" id="dots-x-slider"></td>
-          <td><input type="number" value="10" min="5" max="320" name="dots-x-number" id="dots-x-number"></td>
-        </tr>
-        <tr>
-          <th><label for="">Canvas Width</label></th>
-          <td><input type="range" value="320" min="320" max="1024" class="slider" name="canvas-width-slider" id="canvas-width-slider"></td>
-          <td><input type="number" value="320" min="320" max="1024" name="canvas-width-number" id="canvas-width-number"></td>
-        </tr>
-        <tr>
-          <th><label for="">Canvas Height</label></th>
-          <td><input type="range" value="320" min="320" max="1024" class="slider" name="canvas-height-slider" id="canvas-height-slider"></td>
-          <td><input type="number" value="320" min="320" max="1024" name="canvas-height-number" id="canvas-height-number"></td>
-        </tr>
-      </table>
-    </form>
+    <details id="opts-details">
+      <summary><h3 class="inline">Options</h3></summary>
+      <form id="opts">
+        <table id="opts-table">
+          <tr>
+            <th><label>Dots in X</label></th>
+            <td><input type="range" value="10" min="5" max="240" class="slider" name="dots-x-slider" id="dots-x-slider"></td>
+            <td><input type="number" value="10" min="5" max="240" name="dots-x-number" id="dots-x-number"></td>
+          </tr>
+          <tr>
+            <th><label for="">Canvas Width</label></th>
+            <td><input type="range" value="240" min="240" max="1024" class="slider" name="canvas-width-slider" id="canvas-width-slider"></td>
+            <td><input type="number" value="240" min="240" max="1024" name="canvas-width-number" id="canvas-width-number"></td>
+          </tr>
+          <tr>
+            <th><label for="">Canvas Height</label></th>
+            <td><input type="range" value="240" min="240" max="1024" class="slider" name="canvas-height-slider" id="canvas-height-slider"></td>
+            <td><input type="number" value="240" min="240" max="1024" name="canvas-height-number" id="canvas-height-number"></td>
+          </tr>
+          <tr>
+            <th><label for="">Dot Gradient</label></th>
+            <td><input type="checkbox" id="dot-gradient" name="dot-gradient"></td>
+          </tr>
+        </table>
+      </form>
+    </details>
   </main>
 </body>
 </html>

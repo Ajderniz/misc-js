@@ -34,11 +34,18 @@ td {
   padding-left: 16px;
 }
 
+input[type="checkbox"] {
+}
+
+.inline {
+  display: inline;
+}
+
 #canvas {
   margin: 48px;
 }
 
-#score-h2, #opts {
+#info, #score-h2, #opts-details {
   align-self: flex-start;
 }
 
