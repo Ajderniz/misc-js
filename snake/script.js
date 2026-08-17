@@ -1,8 +1,6 @@
 /*
 TODO:
  - auto adjust cnv size + dot size
- - touch move relative to snake head
- - responsiveness
 */
 
 const Init = {
@@ -99,7 +97,7 @@ const Fruit = {
 
 const sleep = ms => new Promise(r => setTimeout(r, ms));
 
-function onClick(evt) {
+function pointerMove(evt) {
   const dT = evt.offsetY;
   const dL = evt.offsetX;
   const dB = Elems.cnvCnt.offsetHeight - dT;
@@ -110,6 +108,18 @@ function onClick(evt) {
   case dB: St.inputKey = 'ArrowDown'; break;
   case dR: St.inputKey = 'ArrowRight'; break;
   }
+  /*
+  const snakeX = Snake.x[0]*Sys.dotSize + Sys.dotHalf;
+  const snakeY = Snake.y[0]*Sys.dotSize + Sys.dotHalf;
+  const dX = evt.offsetX - snakeX;
+  const dY = evt.offsetY - snakeY;
+  const dXAbs = Math.abs(dX);
+  const dYAbs = Math.abs(dY);
+  switch(Math.max(dXAbs, dYAbs)) {
+  case dXAbs: St.inputKey = (0 < dX) ? 'ArrowRight' : 'ArrowLeft'; break;
+  case dYAbs: St.inputKey = (0 < dY) ? 'ArrowDown'  : 'ArrowUp';   break;
+  }
+  */
 }
 
 function hslToHex(h, s, l) {
@@ -129,7 +139,7 @@ function waitInput() {
     function onKeyHandler(evt) {
       resolve(evt);
     }
-    function onClickHandler(evt) {
+    function pointerMoveHandler(evt) {
       resolve(evt);
     }
     document.addEventListener('keydown', onKeyHandler, { once: true });
@@ -483,7 +493,7 @@ async function run() {
   await waitInput();
   text = '';
   window.addEventListener('keydown', evt => St.inputKey = evt.code);
-  Elems.cnvCnt.addEventListener('click', onClick);
+  Elems.cnvCnt.addEventListener('mousemove', pointerMove);
   loop();
 }
 
