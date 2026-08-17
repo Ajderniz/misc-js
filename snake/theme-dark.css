@@ -1,3 +1,11 @@
+@media screen and (min-width: 480px) {
+  #canvas-container {
+    border-radius: 19px;
+    border-style: solid;
+    border-color: white;
+  }
+}
+
 * {
   background-color: black;
   font-family: "BIZ UDMincho", "MS Mincho", serif;
@@ -12,7 +20,7 @@ h2 {
   font-size: 24px;
 }
 
-.switch-slider, #canvas-container, #canvas {
+.switch-slider, #canvas {
   border-radius: 19px;
   border-style: solid;
   border-color: white;

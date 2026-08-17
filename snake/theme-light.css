@@ -1,3 +1,12 @@
+@media screen and (min-width: 480px) {
+  .switch-slider, #canvas-container {
+    border-radius: 19px;
+    background-color: palevioletred;
+    border-color: lightcoral;
+    border-style: inset;
+  }
+}
+
 * {
   font-family: "Comic Sans MS", sans-serif;
 }
@@ -6,7 +15,7 @@ body, #canvas {
   background-color: beige;
 }
 
-.switch-slider, #canvas-container {
+.switch-slider {
   background-color: palevioletred;
   border-color: lightcoral;
   border-style: inset;
@@ -18,7 +27,7 @@ body, #canvas {
   width: 22px;
 }
 
-#canvas-container, #canvas {
+#canvas {
   border-radius: 19px;
 }
 

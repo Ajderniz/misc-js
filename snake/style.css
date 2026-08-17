@@ -1,3 +1,22 @@
+@media screen and (max-width: 480px) {
+  main {
+    width: 90%;
+  }
+  #canvas-container, #canvas {
+    width: 100%;
+  }
+  #tr-canvas-width, #tr-canvas-height {
+    display: none;
+    visibility: hidden;
+  }
+}
+
+@media screen and (min-width: 480px) {
+  #canvas {
+    margin: 48px;
+  }
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -7,6 +26,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+  width: 100%;
   min-height: 100dvh;
   flex-direction: column;
 }
@@ -39,10 +59,6 @@ input[type="checkbox"] {
 
 .inline {
   display: inline;
-}
-
-#canvas {
-  margin: 48px;
 }
 
 #info, #score-h2, #opts-details {

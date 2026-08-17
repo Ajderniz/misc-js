@@ -48,7 +48,7 @@
     </div>
     <h1 id="title">SNAKE</h1>
     <div id="canvas-container">
-      <canvas id="canvas" width="240" height="240"></canvas>
+      <canvas id="canvas" width="320" height="320"></canvas>
     </div>
     <h2 id="score-h2">SCORE: <span id="score"></span></h2>
     <details id="opts-details">
@@ -57,18 +57,18 @@
         <table id="opts-table">
           <tr>
             <th><label>Dots in X</label></th>
-            <td><input type="range" value="10" min="5" max="240" class="slider" name="dots-x-slider" id="dots-x-slider"></td>
-            <td><input type="number" value="10" min="5" max="240" name="dots-x-number" id="dots-x-number"></td>
+            <td><input type="range" value="10" min="5" max="320" class="slider" name="dots-x-slider" id="dots-x-slider"></td>
+            <td><input type="number" value="10" min="5" max="320" name="dots-x-number" id="dots-x-number"></td>
           </tr>
-          <tr>
+          <tr id="tr-canvas-width">
             <th><label for="">Canvas Width</label></th>
-            <td><input type="range" value="240" min="240" max="1024" class="slider" name="canvas-width-slider" id="canvas-width-slider"></td>
-            <td><input type="number" value="240" min="240" max="1024" name="canvas-width-number" id="canvas-width-number"></td>
+            <td><input type="range" value="320" min="320" max="1024" class="slider" name="canvas-width-slider" id="canvas-width-slider"></td>
+            <td><input type="number" value="320" min="320" max="1024" name="canvas-width-number" id="canvas-width-number"></td>
           </tr>
-          <tr>
+          <tr id="tr-canvas-height">
             <th><label for="">Canvas Height</label></th>
-            <td><input type="range" value="240" min="240" max="1024" class="slider" name="canvas-height-slider" id="canvas-height-slider"></td>
-            <td><input type="number" value="240" min="240" max="1024" name="canvas-height-number" id="canvas-height-number"></td>
+            <td><input type="range" value="320" min="320" max="1024" class="slider" name="canvas-height-slider" id="canvas-height-slider"></td>
+            <td><input type="number" value="320" min="320" max="1024" name="canvas-height-number" id="canvas-height-number"></td>
           </tr>
           <tr>
             <th><label for="">Dot Gradient</label></th>
