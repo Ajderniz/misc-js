@@ -40,6 +40,11 @@ const ClrDark = {
 const fontLight = '28px Comic Sans MS';
 const fontDark  = '36px MS Mincho';
 
+const DirStyle = {
+  abs: 0,
+  rel: 1,
+};
+
 const Elems = {
   cnvCnt:      document.getElementById('canvas-container'),
   cnv:         document.getElementById('canvas'),
@@ -63,7 +68,8 @@ const Opts = {
   dotsX:        0,
   canvasWidth:  Elems.cnv.width,
   canvasHeight: Elems.cnv.height,
-  otGradient:  false,
+  otGradient:   false,
+  dirStyle:     DirStyle.abs,
 };
 
 const Sys = {
@@ -77,6 +83,9 @@ const Sys = {
 
 const St = {
   inputKey:  '',
+  ptDown:    false,
+  ptX:       0,
+  ptY:       0,
   sleepTime: Init.sleepTime,
   score:     0,
   text:      'PRESS ANY KEY',
@@ -97,29 +106,48 @@ const Fruit = {
 
 const sleep = ms => new Promise(r => setTimeout(r, ms));
 
-function pointerMove(evt) {
-  const dT = evt.offsetY;
-  const dL = evt.offsetX;
-  const dB = Elems.cnvCnt.offsetHeight - dT;
-  const dR = Elems.cnvCnt.offsetWidth  - dL;
-  switch(Math.min(dT, dL, dB, dR)) {
-  case dT: St.inputKey = 'ArrowUp'; break;
-  case dL: St.inputKey = 'ArrowLeft'; break;
-  case dB: St.inputKey = 'ArrowDown'; break;
-  case dR: St.inputKey = 'ArrowRight'; break;
+function onPtDown(evt) {
+  St.ptDown = true;
+  St.ptX    = evt.offsetX;
+  St.ptY    = evt.offsetY;
+  checkPt();
+}
+
+function onPtMove(evt) {
+  St.ptX    = evt.offsetX;
+  St.ptY    = evt.offsetY;
+  if (St.ptDown) { checkPt(); }
+}
+
+function onPtUp() {
+  St.ptDown = false;
+}
+
+function checkPt() {
+  if (Opts.dirStyle === DirStyle.abs) {
+    const dT = St.ptY;
+    const dL = St.ptX;
+    const dB = Elems.cnvCnt.offsetHeight - dT;
+    const dR = Elems.cnvCnt.offsetWidth  - dL;
+    switch(Math.min(dT, dL, dB, dR)) {
+    case dT: St.inputKey = 'ArrowUp'; break;
+    case dL: St.inputKey = 'ArrowLeft'; break;
+    case dB: St.inputKey = 'ArrowDown'; break;
+    case dR: St.inputKey = 'ArrowRight'; break;
+    }
   }
-  /*
-  const snakeX = Snake.x[0]*Sys.dotSize + Sys.dotHalf;
-  const snakeY = Snake.y[0]*Sys.dotSize + Sys.dotHalf;
-  const dX = evt.offsetX - snakeX;
-  const dY = evt.offsetY - snakeY;
-  const dXAbs = Math.abs(dX);
-  const dYAbs = Math.abs(dY);
-  switch(Math.max(dXAbs, dYAbs)) {
-  case dXAbs: St.inputKey = (0 < dX) ? 'ArrowRight' : 'ArrowLeft'; break;
-  case dYAbs: St.inputKey = (0 < dY) ? 'ArrowDown'  : 'ArrowUp';   break;
+  else {
+    const snakeX = Snake.x[0]*Sys.dotSize + Sys.dotHalf;
+    const snakeY = Snake.y[0]*Sys.dotSize + Sys.dotHalf;
+    const dX = St.ptX - snakeX;
+    const dY = St.ptY - snakeY;
+    const dXAbs = Math.abs(dX);
+    const dYAbs = Math.abs(dY);
+    switch(Math.max(dXAbs, dYAbs)) {
+    case dXAbs: St.inputKey = (0 < dX) ? 'ArrowRight' : 'ArrowLeft'; break;
+    case dYAbs: St.inputKey = (0 < dY) ? 'ArrowDown'  : 'ArrowUp';   break;
+    }
   }
-  */
 }
 
 function hslToHex(h, s, l) {
@@ -139,7 +167,7 @@ function waitInput() {
     function onKeyHandler(evt) {
       resolve(evt);
     }
-    function pointerMoveHandler(evt) {
+    function onClickHandler(evt) {
       resolve(evt);
     }
     document.addEventListener('keydown', onKeyHandler, { once: true });
@@ -171,6 +199,8 @@ function updateSys() {
   const data = new FormData(Elems.optsForm);
 
   Opts.dotGradient = document.getElementById('dot-gradient').checked;
+  Opts.dirStyle = (document.getElementById('dir-abs').checked) ? DirStyle.abs : 
+                                                                 DirStyle.rel;
 
   const oldCanvasWidth = Elems.cnv.width;
   const newCanvasWidth = parseInt(data.get('canvas-width-number'));
@@ -474,7 +504,7 @@ async function run() {
   const trs = document.getElementsByTagName('tr')
   for (let i=0; i < trs.length; i++) {
     const inputs = trs[i].getElementsByTagName('input');
-    if (inputs.length === 2) {
+    if (inputs.length === 2 && inputs[0].type !== 'radio') {
       inputPairs.set(inputs[0].name, inputs[1].name);
       inputPairs.set(inputs[1].name, inputs[0].name);
     }
@@ -493,7 +523,12 @@ async function run() {
   await waitInput();
   text = '';
   window.addEventListener('keydown', evt => St.inputKey = evt.code);
-  Elems.cnvCnt.addEventListener('mousemove', pointerMove);
+  Elems.cnvCnt.addEventListener('mousedown', onPtDown);
+  Elems.cnvCnt.addEventListener('mousemove', onPtMove);
+  Elems.cnvCnt.addEventListener('mouseup', onPtUp);
+  Elems.cnvCnt.addEventListener('touchend', onPtUp);
+  Elems.cnvCnt.addEventListener('touchmove', onPtMove);
+  Elems.cnvCnt.addEventListener('touchstart', onPtDown);
   loop();
 }
 
